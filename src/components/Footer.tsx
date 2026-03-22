@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <p className="text-xl font-bold text-primary mb-2">ha1sha.com</p>
+            <p className="text-xl font-bold text-primary mb-2">歯医者.com</p>
             <p className="text-sm text-gray-500 leading-relaxed">
               歯医者選びで失敗しないための情報サイト。
               あなたに合った歯科医院を見つけるお手伝いをします。
@@ -53,7 +53,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="mt-10 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
-          &copy; {new Date().getFullYear()} ha1sha.com All rights reserved.
+          &copy; {new Date().getFullYear()} 歯医者.com All rights reserved.
         </div>
       </div>
     </footer>

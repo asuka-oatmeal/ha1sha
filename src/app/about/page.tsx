@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "このサイトについて",
   description:
-    "ha1sha.comは、歯医者選びで失敗しないための情報を発信するサイトです。",
+    "歯医者.comは、歯医者選びで失敗しないための情報を発信するサイトです。",
 };
 
 export default function AboutPage() {
@@ -15,9 +15,9 @@ export default function AboutPage() {
       </h1>
 
       <div className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-a:text-primary">
-        <h2>ha1sha.com とは</h2>
+        <h2>歯医者.com とは</h2>
         <p>
-          ha1sha.comは、<strong>歯医者選びで失敗しないための情報</strong>
+          歯医者.comは、<strong>歯医者選びで失敗しないための情報</strong>
           を発信するサイトです。
         </p>
         <p>

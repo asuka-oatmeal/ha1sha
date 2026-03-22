@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "プライバシーポリシー",
-  description: "ha1sha.comのプライバシーポリシーです。",
+  description: "歯医者.comのプライバシーポリシーです。",
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
       <div className="prose prose-gray max-w-none prose-headings:text-gray-900">
         <p>
-          ha1sha.com（以下「当サイト」）は、ユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
+          歯医者.com（以下「当サイト」）は、ユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
         </p>
 
         <h2>個人情報の収集について</h2>

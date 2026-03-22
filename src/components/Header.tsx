@@ -16,10 +16,7 @@ export default function Header() {
               height={32}
               className="rounded-lg"
             />
-            <span className="text-2xl font-bold text-primary">ha1sha</span>
-            <span className="text-xs text-gray-400 hidden sm:block">
-              歯医者選びの完全ガイド
-            </span>
+            <span className="text-2xl font-bold text-primary">歯医者.com</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-600">
             <Link href="/articles" className="hover:text-primary transition">
