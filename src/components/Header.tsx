@@ -1,12 +1,5 @@
 import Link from "next/link";
-
-const categories = [
-  { name: "歯医者の選び方", href: "/category/choosing" },
-  { name: "治療ガイド", href: "/category/treatment" },
-  { name: "費用・保険", href: "/category/cost" },
-  { name: "予防・ケア", href: "/category/prevention" },
-  { name: "はじめての歯医者", href: "/category/beginner" },
-];
+import { categories } from "@/lib/categories";
 
 export default function Header() {
   return (
@@ -33,8 +26,8 @@ export default function Header() {
         <nav className="flex gap-1 overflow-x-auto pb-2 -mb-px scrollbar-hide">
           {categories.map((cat) => (
             <Link
-              key={cat.href}
-              href={cat.href}
+              key={cat.slug}
+              href={`/category/${cat.slug}`}
               className="shrink-0 px-4 py-2 text-sm font-medium text-gray-600 rounded-full hover:bg-primary-light hover:text-primary transition"
             >
               {cat.name}
