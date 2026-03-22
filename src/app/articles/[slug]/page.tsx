@@ -38,27 +38,46 @@ export default async function ArticlePage({ params }: Props) {
     <div className="max-w-3xl mx-auto px-4 py-12">
       <Link
         href="/articles"
-        className="text-sm text-teal-700 hover:underline mb-6 inline-block"
+        className="inline-flex items-center text-sm text-gray-500 hover:text-primary transition mb-8"
       >
         ← 記事一覧に戻る
       </Link>
 
       <article>
-        <header className="mb-8">
-          <span className="inline-block text-xs font-medium text-teal-700 bg-teal-50 px-2 py-1 rounded mb-3">
+        <header className="mb-10">
+          <span className="inline-block text-xs font-medium text-primary bg-primary-light px-2.5 py-1 rounded-full mb-4">
             {article.category}
           </span>
-          <h1 className="text-3xl font-bold text-gray-900 mb-3">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
             {article.title}
           </h1>
-          <time className="text-sm text-gray-500">{article.date}</time>
+          <p className="text-gray-500 text-sm leading-relaxed mb-3">
+            {article.description}
+          </p>
+          <time className="text-xs text-gray-400">{article.date}</time>
         </header>
 
         <div
-          className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-a:text-teal-700"
+          className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-100 prose-a:text-primary prose-li:marker:text-primary prose-strong:text-gray-900"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
       </article>
+
+      {/* Bottom CTA */}
+      <div className="mt-16 p-8 bg-accent rounded-2xl text-center">
+        <p className="text-lg font-bold text-gray-900 mb-2">
+          他の記事も読んでみませんか？
+        </p>
+        <p className="text-sm text-gray-500 mb-4">
+          歯医者選びに役立つ情報をまとめています
+        </p>
+        <Link
+          href="/articles"
+          className="inline-block bg-primary text-white text-sm font-medium px-6 py-3 rounded-full hover:bg-primary-dark transition"
+        >
+          記事一覧を見る
+        </Link>
+      </div>
     </div>
   );
 }
