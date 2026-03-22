@@ -1,50 +1,42 @@
 import Link from "next/link";
 import Image from "next/image";
-import { categories } from "@/lib/categories";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Top bar */}
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between h-14">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/icon.svg"
-              alt="ha1sha.com"
-              width={32}
-              height={32}
-              className="rounded-lg"
+              alt="歯医者.com"
+              width={28}
+              height={28}
+              className="rounded-md"
             />
-            <span className="text-2xl font-bold text-primary">歯医者.com</span>
+            <span className="text-xl font-bold text-gray-900">歯医者.com</span>
           </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm text-gray-600">
+          <nav className="flex items-center gap-1">
             <Link
               href="/clinic/search"
-              className="hover:text-primary transition font-medium"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md transition"
             >
               歯医者を探す
             </Link>
-            <Link href="/articles" className="hover:text-primary transition">
-              記事一覧
+            <Link
+              href="/articles"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md transition"
+            >
+              コラム
             </Link>
-            <Link href="/about" className="hover:text-primary transition">
+            <Link
+              href="/about"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md transition"
+            >
               このサイトについて
             </Link>
           </nav>
         </div>
-        {/* Category navigation */}
-        <nav className="flex gap-1 overflow-x-auto pb-2 -mb-px scrollbar-hide">
-          {categories.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/category/${cat.slug}`}
-              className="shrink-0 px-4 py-2 text-sm font-medium text-gray-600 rounded-full hover:bg-primary-light hover:text-primary transition"
-            >
-              {cat.name}
-            </Link>
-          ))}
-        </nav>
       </div>
     </header>
   );
