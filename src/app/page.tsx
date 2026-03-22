@@ -1,14 +1,15 @@
 import { getAllArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
-import SearchBox from "@/components/SearchBox";
+import ClinicSearchBox from "@/components/ClinicSearchBox";
 import Link from "next/link";
+import { prefectures, regions } from "@/lib/prefectures";
 
 export default function Home() {
-  const articles = getAllArticles();
+  const articles = getAllArticles().slice(0, 6);
 
   return (
     <>
-      {/* Hero + Search */}
+      {/* Hero + Clinic Search */}
       <section className="bg-gradient-to-b from-accent to-white">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
@@ -17,28 +18,65 @@ export default function Home() {
             が見つかる
           </h1>
           <p className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
-            選び方のポイントから治療の種類、費用の目安まで。
-            歯医者選びに必要な情報をわかりやすくお届けします。
+            全国の歯科医院を検索して、口コミ・評判をチェック。
+            あなたにぴったりの歯医者を見つけましょう。
           </p>
-          <SearchBox />
+          <ClinicSearchBox />
         </div>
       </section>
 
-      {/* Featured categories */}
-      <section className="max-w-6xl mx-auto px-4 -mt-8">
+      {/* Area search */}
+      <section className="max-w-6xl mx-auto px-4 -mt-6">
+        <h2 className="text-lg font-bold text-gray-900 mb-4">
+          エリアから歯医者を探す
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {regions.map((region) => (
+            <div
+              key={region}
+              className="bg-white border border-gray-100 rounded-xl p-5 hover:shadow-sm transition-shadow"
+            >
+              <p className="font-medium text-gray-800 mb-3">{region}</p>
+              <div className="flex flex-wrap gap-x-3 gap-y-1">
+                {prefectures
+                  .filter((p) => p.region === region)
+                  .map((p) => (
+                    <Link
+                      key={p.code}
+                      href={`/clinic/search?pref=${encodeURIComponent(p.name)}`}
+                      className="text-xs text-gray-500 hover:text-primary transition"
+                    >
+                      {p.name}
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Popular specialties */}
+      <section className="max-w-6xl mx-auto px-4 mt-12">
+        <h2 className="text-lg font-bold text-gray-900 mb-4">
+          診療科目から探す
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { icon: "🔍", label: "歯医者の選び方", href: "/category/choosing" },
-            { icon: "💊", label: "治療ガイド", href: "/category/treatment" },
-            { icon: "💰", label: "費用・保険", href: "/category/cost" },
-            { icon: "🪥", label: "予防・ケア", href: "/category/prevention" },
+            { icon: "🦷", label: "一般歯科", q: "一般歯科" },
+            { icon: "👶", label: "小児歯科", q: "小児歯科" },
+            { icon: "✨", label: "審美歯科", q: "審美歯科" },
+            { icon: "🔧", label: "インプラント", q: "インプラント" },
+            { icon: "😁", label: "矯正歯科", q: "矯正歯科" },
+            { icon: "🪥", label: "予防歯科", q: "予防歯科" },
+            { icon: "💎", label: "ホワイトニング", q: "ホワイトニング" },
+            { icon: "🏥", label: "口腔外科", q: "口腔外科" },
           ].map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className="flex flex-col items-center gap-2 bg-white rounded-xl border border-gray-100 p-6 hover:shadow-md transition-shadow"
+              key={item.q}
+              href={`/clinic/search?q=${encodeURIComponent(item.q)}`}
+              className="flex items-center gap-3 bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-shadow"
             >
-              <span className="text-3xl">{item.icon}</span>
+              <span className="text-2xl">{item.icon}</span>
               <span className="text-sm font-medium text-gray-700">
                 {item.label}
               </span>
@@ -47,10 +85,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest articles */}
+      {/* Articles */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">今注目の記事</h2>
+          <h2 className="text-lg font-bold text-gray-900">
+            歯医者選びに役立つ記事
+          </h2>
           <Link
             href="/articles"
             className="text-sm text-primary font-medium hover:underline"
