@@ -1,5 +1,6 @@
 import { getAllArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
+import SearchBox from "@/components/SearchBox";
 import Link from "next/link";
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero + Search */}
       <section className="bg-gradient-to-b from-accent to-white">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
@@ -15,10 +16,11 @@ export default function Home() {
             <span className="text-primary">歯医者</span>
             が見つかる
           </h1>
-          <p className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
             選び方のポイントから治療の種類、費用の目安まで。
             歯医者選びに必要な情報をわかりやすくお届けします。
           </p>
+          <SearchBox />
         </div>
       </section>
 
