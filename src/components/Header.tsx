@@ -19,6 +19,12 @@ export default function Header() {
             <span className="text-2xl font-bold text-primary">歯医者.com</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-600">
+            <Link
+              href="/clinic/search"
+              className="hover:text-primary transition font-medium"
+            >
+              歯医者を探す
+            </Link>
             <Link href="/articles" className="hover:text-primary transition">
               記事一覧
             </Link>
