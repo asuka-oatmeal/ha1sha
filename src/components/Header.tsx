@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { categories } from "@/lib/categories";
 
 export default function Header() {
@@ -7,7 +8,14 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4">
         {/* Top bar */}
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image
+              src="/icon.svg"
+              alt="ha1sha.com"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
             <span className="text-2xl font-bold text-primary">ha1sha</span>
             <span className="text-xs text-gray-400 hidden sm:block">
               歯医者選びの完全ガイド
