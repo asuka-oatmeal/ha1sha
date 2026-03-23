@@ -41,16 +41,19 @@ function prefToFull(name: string): string {
 
 function RegionBlock({ group }: { group: typeof regionGroups[0] }) {
   return (
-    <div className="bg-bg-gray rounded-lg p-4">
-      <p className="inline-block text-xs font-bold px-2 py-0.5 rounded mb-3" style={{ backgroundColor: group.color }}>
+    <div className="border border-gray-200 rounded-xl p-5">
+      <p
+        className="inline-block text-xs font-bold px-2.5 py-1 rounded mb-4"
+        style={{ backgroundColor: group.color }}
+      >
         {group.name}
       </p>
-      <div className="grid grid-cols-3 gap-x-4 gap-y-1.5">
+      <div className="grid grid-cols-3 gap-x-5 gap-y-2.5">
         {group.prefs.map((pref) => (
           <Link
             key={pref}
             href={`/clinic/search?pref=${encodeURIComponent(prefToFull(pref))}`}
-            className="text-[15px] text-text-primary hover:text-primary transition-colors duration-200"
+            className="text-[15px] font-medium text-text-primary hover:text-primary transition-colors duration-200"
           >
             {pref}
           </Link>
@@ -76,25 +79,41 @@ export default function AreaAndFieldSection() {
               </span>
             </div>
 
-            {/* Desktop: map with surrounding region blocks */}
-            <div className="hidden lg:grid grid-cols-[220px_1fr_220px] gap-3 items-start">
-              <div className="space-y-3 pt-2">
-                <RegionBlock group={regionGroups[3]} />
-                <RegionBlock group={regionGroups[4]} />
+            {/* Desktop: 3-col with map in center */}
+            <div className="hidden lg:block">
+              <div className="grid grid-cols-[1fr_minmax(280px,340px)_1fr] gap-x-4 gap-y-4">
+                {/* Row 1: 北陸甲信越 | map-top | 北海道東北 */}
+                <div className="self-start">
+                  <RegionBlock group={regionGroups[3]} />
+                </div>
+                <div className="row-span-3">
+                  <JapanMap />
+                </div>
+                <div className="self-start">
+                  <RegionBlock group={regionGroups[0]} />
+                </div>
+
+                {/* Row 2: 中国 | (map cont.) | 関東 */}
+                <div className="self-start">
+                  <RegionBlock group={regionGroups[4]} />
+                </div>
+                <div className="self-start">
+                  <RegionBlock group={regionGroups[1]} />
+                </div>
+
+                {/* Row 3: (empty) | (map cont.) | 東海 */}
+                <div />
+                <div className="self-start">
+                  <RegionBlock group={regionGroups[2]} />
+                </div>
               </div>
-              <div>
-                <JapanMap />
+
+              {/* Bottom row */}
+              <div className="grid grid-cols-3 gap-4 mt-4">
+                <RegionBlock group={regionGroups[7]} />
+                <RegionBlock group={regionGroups[6]} />
+                <RegionBlock group={regionGroups[5]} />
               </div>
-              <div className="space-y-3 pt-2">
-                <RegionBlock group={regionGroups[0]} />
-                <RegionBlock group={regionGroups[1]} />
-                <RegionBlock group={regionGroups[2]} />
-              </div>
-            </div>
-            <div className="hidden lg:grid grid-cols-3 gap-3 mt-3">
-              <RegionBlock group={regionGroups[7]} />
-              <RegionBlock group={regionGroups[6]} />
-              <RegionBlock group={regionGroups[5]} />
             </div>
 
             {/* Mobile */}
