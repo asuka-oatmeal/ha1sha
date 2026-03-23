@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | 歯医者.com",
   },
   description:
-    "歯医者選びで失敗しないための情報サイト。選び方のポイント、治療の種類、費用の目安まで、歯科に関するあらゆる情報をお届けします。",
+    "歯医者選びで失敗しないための情報サイト。全国の歯科医院を検索し、口コミ・評判をチェックできます。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
@@ -41,7 +41,7 @@ export default function RootLayout({
       lang="ja"
       className={`${notoSansJP.variable} ${notoSerifJP.variable} ${notoSansJP.className}`}
     >
-      <body className="min-h-screen flex flex-col bg-white text-gray-800">
+      <body className="min-h-screen flex flex-col bg-white text-text-primary">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

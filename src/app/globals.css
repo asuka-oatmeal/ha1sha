@@ -2,9 +2,14 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-  --color-primary: #c0392b;
-  --color-primary-light: #fdf2f1;
-  --color-primary-dark: #a93226;
-  --color-accent: #f7f8fa;
-  --color-dark: #1a1a1a;
+  --color-primary: #1A6B9C;
+  --color-primary-dark: #0D4F73;
+  --color-primary-light: #E8F4FA;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A5568;
+  --color-text-tertiary: #718096;
+  --color-border: #E2E8F0;
+  --color-bg-gray: #F7F8FA;
+  --color-bg-hover: #EDF2F7;
+  --color-success: #38A169;
 }
