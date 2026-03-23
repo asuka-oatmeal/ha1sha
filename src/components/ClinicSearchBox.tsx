@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { prefectures, regions } from "@/lib/prefectures";
 
-const specialties = [
-  "すべての診療科目",
+const specialtyOptions = [
   "一般歯科",
   "小児歯科",
   "矯正歯科",
@@ -25,20 +24,28 @@ export default function ClinicSearchBox() {
   function handleSearch() {
     const params = new URLSearchParams();
     if (prefecture) params.set("pref", prefecture);
-    if (specialty && specialty !== "すべての診療科目")
-      params.set("q", specialty);
+    if (specialty) params.set("q", specialty);
     router.push(`/clinic/search?${params.toString()}`);
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
-      <div className="flex flex-col sm:flex-row gap-3">
-        {/* Prefecture */}
-        <div className="flex-1 relative">
+    <div className="w-full max-w-3xl">
+      <p className="text-sm text-primary font-medium mb-3 flex items-center gap-1">
+        <span className="inline-block bg-primary text-white text-xs px-2 py-0.5 rounded">
+          まずはエリアを選択
+        </span>
+        <span className="text-primary">▼</span>
+      </p>
+      <div className="flex flex-col sm:flex-row bg-white rounded-lg overflow-hidden shadow-lg">
+        {/* Area */}
+        <div className="flex-1 flex items-center border-b sm:border-b-0 sm:border-r border-gray-200">
+          <span className="text-xs text-gray-400 pl-4 pr-2 shrink-0">
+            地域
+          </span>
           <select
             value={prefecture}
             onChange={(e) => setPrefecture(e.target.value)}
-            className="w-full px-4 py-4 bg-white border border-gray-300 rounded-lg text-sm appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="flex-1 px-2 py-4 text-sm text-gray-900 bg-transparent appearance-none cursor-pointer focus:outline-none"
           >
             <option value="">エリアを選ぶ</option>
             {regions.map((region) => (
@@ -54,7 +61,7 @@ export default function ClinicSearchBox() {
             ))}
           </select>
           <svg
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+            className="w-4 h-4 text-gray-400 mr-3 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -69,21 +76,24 @@ export default function ClinicSearchBox() {
         </div>
 
         {/* Specialty */}
-        <div className="flex-1 relative">
+        <div className="flex-1 flex items-center border-b sm:border-b-0 sm:border-r border-gray-200">
+          <span className="text-xs text-gray-400 pl-4 pr-2 shrink-0">
+            分野
+          </span>
           <select
             value={specialty}
             onChange={(e) => setSpecialty(e.target.value)}
-            className="w-full px-4 py-4 bg-white border border-gray-300 rounded-lg text-sm appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="flex-1 px-2 py-4 text-sm text-gray-900 bg-transparent appearance-none cursor-pointer focus:outline-none"
           >
             <option value="">診療科目を選ぶ</option>
-            {specialties.map((s) => (
+            {specialtyOptions.map((s) => (
               <option key={s} value={s}>
                 {s}
               </option>
             ))}
           </select>
           <svg
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+            className="w-4 h-4 text-gray-400 mr-3 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -100,7 +110,7 @@ export default function ClinicSearchBox() {
         {/* Search button */}
         <button
           onClick={handleSearch}
-          className="bg-primary text-white font-medium px-8 py-4 rounded-lg hover:bg-primary-dark transition shrink-0"
+          className="bg-primary text-white font-bold px-8 py-4 hover:bg-primary-dark transition shrink-0"
         >
           検索する
         </button>
