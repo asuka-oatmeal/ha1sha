@@ -87,30 +87,36 @@ export default function AreaAndFieldSection() {
 
             {/* Desktop layout */}
             <div className="hidden lg:block">
-              {/* Top: left blocks + map + right blocks */}
-              <div className="flex gap-4">
-                {/* Left blocks */}
-                <div className="w-[220px] shrink-0 space-y-4">
-                  {leftRegions.map((g) => (
-                    <RegionBlock key={g.name} group={g} />
-                  ))}
+              <div className="grid grid-cols-[200px_1fr_200px] gap-x-3 gap-y-4">
+                {/* Row 1 */}
+                <div className="self-start">
+                  <RegionBlock group={leftRegions[0]} />
                 </div>
-
-                {/* Map */}
-                <div className="flex-1 min-w-0">
+                <div className="row-span-2 flex items-center justify-center px-2">
                   <JapanMap />
                 </div>
+                <div className="self-start">
+                  <RegionBlock group={rightRegions[0]} />
+                </div>
 
-                {/* Right blocks */}
-                <div className="w-[220px] shrink-0 space-y-4">
-                  {rightRegions.map((g) => (
-                    <RegionBlock key={g.name} group={g} />
-                  ))}
+                {/* Row 2 */}
+                <div className="self-start">
+                  <RegionBlock group={leftRegions[1]} />
+                </div>
+                <div className="self-start">
+                  <RegionBlock group={rightRegions[1]} />
+                </div>
+
+                {/* Row 3 (below map) */}
+                <div />
+                <div />
+                <div className="self-start">
+                  <RegionBlock group={rightRegions[2]} />
                 </div>
               </div>
 
               {/* Bottom row */}
-              <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-3 gap-3 mt-4">
                 {bottomRegions.map((g) => (
                   <RegionBlock key={g.name} group={g} />
                 ))}
