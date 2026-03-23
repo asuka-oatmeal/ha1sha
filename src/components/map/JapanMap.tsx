@@ -1,7 +1,3 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 type PrefData = {
   code: number;
@@ -70,56 +66,26 @@ const regionColors: Record<string, string> = {
   kyushu: "#d7bde2",
 };
 
-export default function JapanMap({ activeRegion }: { activeRegion?: string }) {
-  const router = useRouter();
-  const [hovered, setHovered] = useState<number | null>(null);
-
-  function handleClick(code: number) {
-    const pref = prefMap[code];
-    if (pref) {
-      router.push(`/clinic/search?pref=${encodeURIComponent(pref.name)}`);
-    }
-  }
-
+export default function JapanMap() {
   function getFill(code: number): string {
     const pref = prefMap[code];
     if (!pref) return "#E2E8F0";
-    if (hovered === code) return "#1A6B9C";
-    if (activeRegion && pref.region === activeRegion) return regionColors[pref.region] ?? "#E2E8F0";
-    return "#E2E8F0";
+    return regionColors[pref.region] ?? "#E2E8F0";
   }
 
-  function getStroke(code: number): string {
-    return hovered === code ? "#0D4F73" : "#FFFFFF";
-  }
-
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  function prefProps(code: number): any {
+  function prefProps(code: number) {
     return {
       fill: getFill(code),
-      stroke: getStroke(code),
+      stroke: "#FFFFFF",
       strokeWidth: 1,
       strokeLinejoin: "round" as const,
       fillRule: "nonzero" as const,
-      className: "transition-[fill,stroke] duration-200 cursor-pointer",
-      role: "button",
-      tabIndex: 0,
-      "aria-label": prefMap[code]?.name,
-      onClick: () => handleClick(code),
-      onMouseEnter: () => setHovered(code),
-      onMouseLeave: () => setHovered(null),
-      onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") handleClick(code); },
     };
   }
 
   return (
-    <div className="relative">
-      {hovered && (
-        <div className="absolute top-2 left-2 bg-white border border-border rounded-lg px-3 py-1.5 text-sm font-medium text-text-primary shadow-sm z-10">
-          {prefMap[hovered]?.name}
-        </div>
-      )}
-      <svg viewBox="0 0 1000 1000" className="w-full max-w-[600px] mx-auto">
+    <div>
+      <svg viewBox="0 0 1000 1000" className="w-full">
         <g transform="matrix(1.028807, 0, 0, 1.028807, -47.544239, -28.806583)">
           <g transform="matrix(1, 0, 0, 1, 6, 18)">
             {/* 47: 沖縄 */}

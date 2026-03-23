@@ -18,18 +18,18 @@ const regionGroups = [
 ];
 
 const specialties = [
-  { icon: Stethoscope, label: "一般歯科" },
-  { icon: Baby, label: "小児歯科" },
-  { icon: SmilePlus, label: "矯正歯科" },
-  { icon: Sparkles, label: "審美歯科" },
-  { icon: Wrench, label: "インプラント" },
-  { icon: Hospital, label: "口腔外科" },
-  { icon: Brush, label: "予防歯科" },
-  { icon: HeartPulse, label: "ホワイトニング" },
-  { icon: ShieldCheck, label: "歯周病治療" },
-  { icon: HeartHandshake, label: "歯科恐怖症対応" },
-  { icon: Moon, label: "夜間診療" },
-  { icon: ParkingCircle, label: "駐車場あり" },
+  { icon: Stethoscope, label: "一般歯科", color: "text-blue-600", bg: "bg-blue-50" },
+  { icon: Baby, label: "小児歯科", color: "text-pink-500", bg: "bg-pink-50" },
+  { icon: SmilePlus, label: "矯正歯科", color: "text-purple-600", bg: "bg-purple-50" },
+  { icon: Sparkles, label: "審美歯科", color: "text-amber-500", bg: "bg-amber-50" },
+  { icon: Wrench, label: "インプラント", color: "text-sky-600", bg: "bg-sky-50" },
+  { icon: Hospital, label: "口腔外科", color: "text-red-500", bg: "bg-red-50" },
+  { icon: Brush, label: "予防歯科", color: "text-green-600", bg: "bg-green-50" },
+  { icon: HeartPulse, label: "ホワイトニング", color: "text-indigo-500", bg: "bg-indigo-50" },
+  { icon: ShieldCheck, label: "歯周病治療", color: "text-teal-600", bg: "bg-teal-50" },
+  { icon: HeartHandshake, label: "歯科恐怖症対応", color: "text-rose-500", bg: "bg-rose-50" },
+  { icon: Moon, label: "夜間診療", color: "text-violet-600", bg: "bg-violet-50" },
+  { icon: ParkingCircle, label: "駐車場あり", color: "text-slate-600", bg: "bg-slate-100" },
 ];
 
 function prefToFull(name: string): string {
@@ -77,21 +77,21 @@ export default function AreaAndFieldSection() {
             </div>
 
             {/* Desktop: map with surrounding region blocks */}
-            <div className="hidden lg:grid grid-cols-[200px_1fr_200px] gap-4 items-start">
-              <div className="space-y-3">
+            <div className="hidden lg:grid grid-cols-[220px_1fr_220px] gap-3 items-start">
+              <div className="space-y-3 pt-2">
                 <RegionBlock group={regionGroups[3]} />
                 <RegionBlock group={regionGroups[4]} />
               </div>
-              <div className="px-2">
+              <div>
                 <JapanMap />
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 pt-2">
                 <RegionBlock group={regionGroups[0]} />
                 <RegionBlock group={regionGroups[1]} />
                 <RegionBlock group={regionGroups[2]} />
               </div>
             </div>
-            <div className="hidden lg:grid grid-cols-3 gap-4 mt-4">
+            <div className="hidden lg:grid grid-cols-3 gap-3 mt-3">
               <RegionBlock group={regionGroups[7]} />
               <RegionBlock group={regionGroups[6]} />
               <RegionBlock group={regionGroups[5]} />
@@ -123,9 +123,9 @@ export default function AreaAndFieldSection() {
                   <Link
                     key={item.label}
                     href={`/clinic/search?q=${encodeURIComponent(item.label)}`}
-                    className="flex flex-col items-center justify-center gap-2 bg-white border border-border rounded-[8px] p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+                    className={`flex flex-col items-center justify-center gap-3 ${item.bg} border border-transparent rounded-[10px] p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200`}
                   >
-                    <Icon size={36} strokeWidth={1.5} className="text-text-primary" />
+                    <Icon size={36} strokeWidth={1.5} className={item.color} />
                     <span className="text-[13px] font-medium text-text-primary text-center">
                       {item.label}
                     </span>
