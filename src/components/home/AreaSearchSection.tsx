@@ -3,6 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
+import JapanMap from "@/components/map/JapanMap";
+
+const regionToMapRegion: Record<string, string> = {
+  "北海道東北": "tohoku",
+  "関東": "kanto",
+  "中部": "chubu",
+  "近畿": "kinki",
+  "中国": "chugoku",
+  "四国": "shikoku",
+  "九州沖縄": "kyushu",
+};
 
 const regionGroups = [
   { name: "北海道東北", prefs: ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"] },
@@ -40,17 +51,25 @@ export default function AreaSearchSection() {
           ))}
         </div>
 
-        {/* Prefecture grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
-          {activeGroup.prefs.map((pref) => (
-            <Link
-              key={pref}
-              href={`/clinic/search?pref=${encodeURIComponent(pref)}`}
-              className="text-center py-3 px-3 text-[15px] text-text-primary hover:text-primary hover:bg-primary-light rounded-lg transition-colors duration-200"
-            >
-              {pref}
-            </Link>
-          ))}
+        {/* Map + Prefecture grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          {/* Map (hidden on mobile) */}
+          <div className="hidden lg:block">
+            <JapanMap activeRegion={regionToMapRegion[activeRegion]} />
+          </div>
+
+          {/* Prefecture grid */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+            {activeGroup.prefs.map((pref) => (
+              <Link
+                key={pref}
+                href={`/clinic/search?pref=${encodeURIComponent(pref)}`}
+                className="text-center py-3 px-3 text-[15px] text-text-primary hover:text-primary hover:bg-primary-light rounded-lg transition-colors duration-200"
+              >
+                {pref}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>
