@@ -98,11 +98,10 @@ export default function JapanMap({ activeRegion }: { activeRegion?: string }) {
     return {
       fill: getFill(code),
       stroke: getStroke(code),
-      strokeWidth: hovered === code ? 1.5 : 1,
+      strokeWidth: 1,
       strokeLinejoin: "round" as const,
       fillRule: "nonzero" as const,
-      className: "transition-[fill] duration-200 cursor-pointer",
-      style: hovered === code ? { transform: "scale(1.03)", transformOrigin: "center" } : undefined,
+      className: "transition-[fill,stroke] duration-200 cursor-pointer",
       role: "button",
       tabIndex: 0,
       "aria-label": prefMap[code]?.name,
