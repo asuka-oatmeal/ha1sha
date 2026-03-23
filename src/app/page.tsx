@@ -1,8 +1,8 @@
 import { getAllArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import ClinicSearchBox from "@/components/ClinicSearchBox";
+import JapanMap from "@/components/JapanMap";
 import Link from "next/link";
-import { prefectures } from "@/lib/prefectures";
 
 const regionGroups = [
   {
@@ -35,7 +35,9 @@ const regionGroups = [
   },
   {
     name: "九州・沖縄",
-    prefs: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"],
+    prefs: [
+      "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
+    ],
   },
 ];
 
@@ -60,36 +62,43 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-        <div className="max-w-6xl mx-auto px-4 pt-12 pb-16 md:pt-16 md:pb-20">
-          <p className="text-2xl md:text-4xl font-bold leading-tight mb-1">
+      <section className="bg-dark text-white">
+        <div className="max-w-6xl mx-auto px-4 pt-10 pb-14 md:pt-14 md:pb-20">
+          <p className="text-2xl md:text-4xl leading-tight mb-1 font-[var(--font-serif)]">
             あなたに合った歯医者が見つかる、
           </p>
-          <p className="text-3xl md:text-5xl font-bold text-primary mb-8">
+          <p className="text-3xl md:text-5xl font-bold text-primary mb-10 font-[var(--font-serif)]">
             歯医者.com。
           </p>
           <ClinicSearchBox />
         </div>
       </section>
 
-      {/* Two column: Area + Specialty */}
+      {/* Area + Map + Specialty - two column */}
       <section className="max-w-6xl mx-auto px-4 py-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left: Area */}
+          {/* Left: Area with map */}
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-1">
+            <h2 className="text-xl font-bold text-gray-900 mb-1 font-[var(--font-serif)]">
               エリアから歯医者を探す
-              <span className="text-sm font-normal text-gray-400 ml-2">
+              <span className="text-sm font-normal text-gray-400 ml-2 font-sans">
                 Location
               </span>
             </h2>
-            <div className="mt-6 space-y-5">
+
+            {/* Japan Map */}
+            <div className="my-6">
+              <JapanMap />
+            </div>
+
+            {/* Prefecture links */}
+            <div className="space-y-4">
               {regionGroups.map((group) => (
-                <div key={group.name}>
-                  <p className="inline-block text-sm font-bold text-gray-800 bg-gray-100 px-2 py-0.5 rounded mb-2">
+                <div key={group.name} className="flex items-start gap-3">
+                  <span className="inline-block text-xs font-bold text-white bg-gray-700 px-2 py-1 rounded shrink-0 mt-0.5">
                     {group.name}
-                  </p>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  </span>
+                  <div className="flex flex-wrap gap-x-3 gap-y-1">
                     {group.prefs.map((pref) => (
                       <Link
                         key={pref}
@@ -107,9 +116,9 @@ export default function Home() {
 
           {/* Right: Specialty */}
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-1">
+            <h2 className="text-xl font-bold text-gray-900 mb-1 font-[var(--font-serif)]">
               診療科目から歯医者を探す
-              <span className="text-sm font-normal text-gray-400 ml-2">
+              <span className="text-sm font-normal text-gray-400 ml-2 font-sans">
                 Field
               </span>
             </h2>
@@ -132,12 +141,12 @@ export default function Home() {
       </section>
 
       {/* Articles */}
-      <section className="bg-gray-50 border-t border-gray-100">
+      <section className="bg-accent border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-14">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className="text-xl font-bold text-gray-900 font-[var(--font-serif)]">
               コラム
-              <span className="text-sm font-normal text-gray-400 ml-2">
+              <span className="text-sm font-normal text-gray-400 ml-2 font-sans">
                 Column
               </span>
             </h2>

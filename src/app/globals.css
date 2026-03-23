@@ -2,8 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-  --color-primary: #1a6fc4;
-  --color-primary-light: #e8f2fc;
-  --color-primary-dark: #145a9e;
-  --color-accent: #f5f8fc;
+  --color-primary: #c0392b;
+  --color-primary-light: #fdf2f1;
+  --color-primary-dark: #a93226;
+  --color-accent: #f7f8fa;
+  --color-dark: #1a1a1a;
 }

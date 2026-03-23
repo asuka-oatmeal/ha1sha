@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+  variable: "--font-sans",
+});
+
+const notoSerifJP = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={notoSansJP.className}>
+    <html
+      lang="ja"
+      className={`${notoSansJP.variable} ${notoSerifJP.variable} ${notoSansJP.className}`}
+    >
       <body className="min-h-screen flex flex-col bg-white text-gray-800">
         <Header />
         <main className="flex-1">{children}</main>
