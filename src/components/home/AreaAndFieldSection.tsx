@@ -6,15 +6,21 @@ import {
   Brush, HeartHandshake, Moon, ParkingCircle,
 } from "lucide-react";
 
-const regionGroups = [
+const leftRegions = [
+  { name: "北陸・甲信越", prefs: ["新潟", "富山", "石川", "福井", "山梨", "長野"], color: "#d0c8e0" },
+  { name: "中国", prefs: ["鳥取", "島根", "岡山", "広島", "山口"], color: "#c8d8e8" },
+];
+
+const rightRegions = [
   { name: "北海道・東北", prefs: ["北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島"], color: "#c8d8e8" },
   { name: "関東", prefs: ["東京", "神奈川", "千葉", "埼玉", "茨城", "栃木", "群馬"], color: "#e2dcc8" },
   { name: "東海", prefs: ["愛知", "静岡", "岐阜", "三重"], color: "#c8d8c8" },
-  { name: "北陸・甲信越", prefs: ["新潟", "富山", "石川", "福井", "山梨", "長野"], color: "#d0c8e0" },
-  { name: "中国", prefs: ["鳥取", "島根", "岡山", "広島", "山口"], color: "#c8d8e8" },
-  { name: "近畿", prefs: ["大阪", "兵庫", "京都", "滋賀", "奈良", "和歌山"], color: "#d8d0a8" },
-  { name: "四国", prefs: ["徳島", "香川", "愛媛", "高知"], color: "#c8d8c8" },
+];
+
+const bottomRegions = [
   { name: "九州・沖縄", prefs: ["福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄"], color: "#d0c8e0" },
+  { name: "四国", prefs: ["徳島", "香川", "愛媛", "高知"], color: "#c8d8c8" },
+  { name: "近畿", prefs: ["大阪", "兵庫", "京都", "滋賀", "奈良", "和歌山"], color: "#d8d0a8" },
 ];
 
 const specialties = [
@@ -39,16 +45,16 @@ function prefToFull(name: string): string {
   return map[name] ?? name + "県";
 }
 
-function RegionBlock({ group }: { group: typeof regionGroups[0] }) {
+function RegionBlock({ group }: { group: { name: string; prefs: string[]; color: string } }) {
   return (
     <div className="border border-gray-200 rounded-xl p-5">
       <p
-        className="inline-block text-xs font-bold px-2.5 py-1 rounded mb-4"
+        className="inline-block text-xs font-bold px-2.5 py-1 rounded mb-3"
         style={{ backgroundColor: group.color }}
       >
         {group.name}
       </p>
-      <div className="grid grid-cols-3 gap-x-5 gap-y-2.5">
+      <div className="flex flex-wrap gap-x-5 gap-y-2">
         {group.prefs.map((pref) => (
           <Link
             key={pref}
@@ -66,12 +72,12 @@ function RegionBlock({ group }: { group: typeof regionGroups[0] }) {
 export default function AreaAndFieldSection() {
   return (
     <section className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-16">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_480px] gap-16">
           {/* Left: Area */}
           <div>
             <div className="mb-8">
-              <h2 className="text-[22px] md:text-[28px] font-bold text-text-primary leading-[1.4] tracking-[0.02em] inline">
+              <h2 className="text-[22px] md:text-[28px] font-bold text-text-primary inline">
                 エリアから歯医者を探す
               </h2>
               <span className="text-[13px] font-[var(--font-serif)] tracking-[0.1em] text-text-tertiary ml-3">
@@ -79,47 +85,42 @@ export default function AreaAndFieldSection() {
               </span>
             </div>
 
-            {/* Desktop: 3-col with map in center */}
+            {/* Desktop layout */}
             <div className="hidden lg:block">
-              <div className="grid grid-cols-[1fr_minmax(280px,340px)_1fr] gap-x-4 gap-y-4">
-                {/* Row 1: 北陸甲信越 | map-top | 北海道東北 */}
-                <div className="self-start">
-                  <RegionBlock group={regionGroups[3]} />
+              {/* Top: left blocks + map + right blocks */}
+              <div className="flex gap-4">
+                {/* Left blocks */}
+                <div className="w-[220px] shrink-0 space-y-4">
+                  {leftRegions.map((g) => (
+                    <RegionBlock key={g.name} group={g} />
+                  ))}
                 </div>
-                <div className="row-span-3">
+
+                {/* Map */}
+                <div className="flex-1 min-w-0">
                   <JapanMap />
                 </div>
-                <div className="self-start">
-                  <RegionBlock group={regionGroups[0]} />
-                </div>
 
-                {/* Row 2: 中国 | (map cont.) | 関東 */}
-                <div className="self-start">
-                  <RegionBlock group={regionGroups[4]} />
-                </div>
-                <div className="self-start">
-                  <RegionBlock group={regionGroups[1]} />
-                </div>
-
-                {/* Row 3: (empty) | (map cont.) | 東海 */}
-                <div />
-                <div className="self-start">
-                  <RegionBlock group={regionGroups[2]} />
+                {/* Right blocks */}
+                <div className="w-[220px] shrink-0 space-y-4">
+                  {rightRegions.map((g) => (
+                    <RegionBlock key={g.name} group={g} />
+                  ))}
                 </div>
               </div>
 
               {/* Bottom row */}
               <div className="grid grid-cols-3 gap-4 mt-4">
-                <RegionBlock group={regionGroups[7]} />
-                <RegionBlock group={regionGroups[6]} />
-                <RegionBlock group={regionGroups[5]} />
+                {bottomRegions.map((g) => (
+                  <RegionBlock key={g.name} group={g} />
+                ))}
               </div>
             </div>
 
             {/* Mobile */}
             <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {regionGroups.map((group) => (
-                <RegionBlock key={group.name} group={group} />
+              {[...leftRegions, ...rightRegions, ...bottomRegions].map((g) => (
+                <RegionBlock key={g.name} group={g} />
               ))}
             </div>
           </div>
@@ -127,7 +128,7 @@ export default function AreaAndFieldSection() {
           {/* Right: Field */}
           <div>
             <div className="mb-8">
-              <h2 className="text-[22px] md:text-[28px] font-bold text-text-primary leading-[1.4] tracking-[0.02em] inline">
+              <h2 className="text-[22px] md:text-[28px] font-bold text-text-primary inline">
                 診療科目から歯医者を探す
               </h2>
               <span className="text-[13px] font-[var(--font-serif)] tracking-[0.1em] text-text-tertiary ml-3">
@@ -135,14 +136,14 @@ export default function AreaAndFieldSection() {
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {specialties.map((item) => {
                 const Icon = item.icon;
                 return (
                   <Link
                     key={item.label}
                     href={`/clinic/search?q=${encodeURIComponent(item.label)}`}
-                    className={`flex flex-col items-center justify-center gap-3 ${item.bg} border border-transparent rounded-[10px] p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200`}
+                    className={`flex flex-col items-center justify-center gap-3 ${item.bg} rounded-[10px] p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200`}
                   >
                     <Icon size={36} strokeWidth={1.5} className={item.color} />
                     <span className="text-[13px] font-medium text-text-primary text-center">
