@@ -24,7 +24,7 @@ export default function HeroSection() {
 
   return (
     <section className="bg-primary-light">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-20 text-center">
         <p className="text-[20px] md:text-[28px] text-text-primary leading-[1.4] tracking-[0.02em]">
           あなたに合った歯医者が見つかる、
         </p>
@@ -33,7 +33,7 @@ export default function HeroSection() {
         </p>
 
         {/* Search form */}
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto">
           <div className="flex flex-col sm:flex-row bg-white rounded-lg overflow-hidden border border-border shadow-sm">
             <div className="flex-1 flex items-center border-b sm:border-b-0 sm:border-r border-border">
               <span className="text-xs text-text-tertiary pl-4 pr-2 shrink-0">
