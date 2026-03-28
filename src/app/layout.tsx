@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -45,6 +48,13 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
+        <Script
+          defer
+          src="https://umami-murex-one-27.vercel.app/script.js"
+          data-website-id="2692e76f-876b-4ce4-bc83-9eafda5408c7"
+        />
       </body>
     </html>
   );
