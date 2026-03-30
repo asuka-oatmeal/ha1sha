@@ -2,6 +2,7 @@ import { getArticle, getAllArticleSlugs } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import ArticleEyecatch from "@/components/ArticleEyecatch";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -45,16 +46,23 @@ export default async function ArticlePage({ params }: Props) {
 
       <article>
         <header className="mb-10">
-          <span className="inline-block text-xs font-medium text-primary bg-primary-light px-2.5 py-1 rounded-full mb-4">
-            {article.category}
-          </span>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-            {article.title}
-          </h1>
-          <p className="text-gray-500 text-sm leading-relaxed mb-3">
-            {article.description}
-          </p>
-          <time className="text-xs text-gray-400">{article.date}</time>
+          <ArticleEyecatch
+            title={article.title}
+            category={article.category}
+            size="hero"
+          />
+          <div className="mt-6">
+            <span className="inline-block text-xs font-medium text-primary bg-primary-light px-2.5 py-1 rounded-full mb-4">
+              {article.category}
+            </span>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+              {article.title}
+            </h1>
+            <p className="text-gray-500 text-sm leading-relaxed mb-3">
+              {article.description}
+            </p>
+            <time className="text-xs text-gray-400">{article.date}</time>
+          </div>
         </header>
 
         <div
@@ -64,7 +72,7 @@ export default async function ArticlePage({ params }: Props) {
       </article>
 
       {/* Bottom CTA */}
-      <div className="mt-16 p-8 bg-accent rounded-2xl text-center">
+      <div className="mt-16 p-8 bg-primary-light rounded-2xl text-center">
         <p className="text-lg font-bold text-gray-900 mb-2">
           他の記事も読んでみませんか？
         </p>
