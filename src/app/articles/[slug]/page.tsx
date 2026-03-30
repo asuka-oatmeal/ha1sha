@@ -66,7 +66,7 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         <div
-          className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-100 prose-a:text-primary prose-li:marker:text-primary prose-strong:text-gray-900"
+          className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-a:text-primary prose-li:marker:text-primary prose-strong:text-gray-900"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
       </article>
